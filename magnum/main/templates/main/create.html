@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% block title %} Create List {% endblock %}
+
+{% block content %} 
+<h3> Create </h3>
+
+{% if user.is_authenticated %}
+    <form method="post" action="/create/">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button type="submit", name="save", class="btn btn-success">Create list</button>
+            </div>
+            {{form.name}}
+        </div>
+    </form> 
+{% else %} 
+    <p> To create a list, log in <a href="/login">here</a></p>
+{% endif %}
+{% endblock %}
+
