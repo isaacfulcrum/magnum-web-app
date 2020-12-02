@@ -1,9 +1,7 @@
 {% extends "main/base.html" %}
 {% block title %} Create List {% endblock %}
-
 {% block content %} 
 <h3> Create </h3>
-
 {% if user.is_authenticated %}
     <form method="post" action="/create/">
         {% csrf_token %}

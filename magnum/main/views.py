@@ -12,6 +12,9 @@ def index(response, id):
         return render(response, "main/list.html", {})
 
     if ls in response.user.todolist.all():
+
+        print(response.method)
+
         if response.method == "POST":
             if response.POST.get("save"):
                 for item in ls.item_set.all():
@@ -28,13 +31,25 @@ def index(response, id):
                 else:
                     print("Invalid input")
 
-        return render(response, "main/list.html", {"ls": ls})
+        percent = ls.item_set.count()
+        if percent == 0:
+            return render(response, "main/list.html", {"ls": ls})
+
+        counter = 0
+        for item in ls.item_set.all():
+            if item.complete:
+                counter += 1
+
+        counter *= 100
+        percent = counter//percent
+
+        return render(response, "main/list.html", {"ls": ls, "percent": percent})
 
     return render(response, "main/view.html", {})
 
 
 def home(response):
-    return render(response, "main/home.html", {})
+    return render(response, "main/base.html", {})
 
 
 def create(response):
@@ -53,7 +68,3 @@ def create(response):
         form = create_list()
 
     return render(response, "main/create.html", {"form": form})
-
-
-def view(response):
-    return render(response, "main/view.html", {})
