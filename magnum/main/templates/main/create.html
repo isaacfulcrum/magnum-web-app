@@ -1,6 +1,13 @@
 {% extends "main/base.html" %}
-{% block title %} Create List {% endblock %}
+{% block title %} Nuevo Proyecto {% endblock %}
 {% block content %}
+
+{% if user.is_authenticated %}
+    <div class="userCard">
+        <h6>{{user.username}}<a href="/logout"> | salir</a></h6>
+    </div>
+{% endif%}
+
 <div class="home">
 <h1> Nuevo Proyecto </h1>
 {% if user.is_authenticated %}

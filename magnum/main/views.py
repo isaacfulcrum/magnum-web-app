@@ -13,8 +13,6 @@ def index(response, id):
 
     if ls in response.user.todolist.all():
 
-        print(response.method)
-
         if response.method == "POST":
             if response.POST.get("save"):
                 for item in ls.item_set.all():

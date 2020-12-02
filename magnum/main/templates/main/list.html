@@ -1,60 +1,60 @@
 {% extends "main/base.html" %}
 
 {% if user.is_authenticated %}
+    {% block title %} {{ls.name}} {% endblock %}
+{% endif %}
 
-{% block title %} {{ls.name}} {% endblock %}
-    {% block content %}
-    <div class="stats"> 
-    
-    <div class="title-container">
-        <h1>{{ls.name}}</h1>
-    </div>
-    
-    <div class="percent-container">
-        <h1>Progreso</h1>
-        <div class="progress" style="height:40px">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
-            style="width:{{percent}}%;height:40px">{{percent}}%</div>
-        </div>
-    </div>
-
+{% block content %}
     {% if user.is_authenticated %}
-        <div class="userCard">
-            <h6>{{user.username}}<a href="/logout"> | logout</a></h6>
+        <div class="stats">     
+        <div class="title-container">
+            <h1>{{ls.name}}</h1>
         </div>
-    {% endif%}
-    </div>
-    
-    <div class="container">
-        <form id="test" method="POST" action="#">
-            {% csrf_token %}
 
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                </div>
-                <input type="text", name="new_text">
-                <button type="submit", name="new_item", value="new_item", class="btn btn-danger">Añadir tarea</button>    
+        <div class="percent-container">
+            <h1>Progreso</h1>
+            <div class="progress" style="height:40px">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
+                style="width:{{percent}}%;height:40px">{{percent}}%</div>
             </div>
+        </div>
 
-            {% for item in ls.item_set.all %}
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <input type="text", value="{{item.text}}" class="form-control" size="50">
-                    <div class="input-group-text"> 
-                        {% if item.complete %}
-                            <input type="checkbox", value="clicked", name="c{{item.id}}" checked/>
-                        {% else %}
-                        <input type="checkbox", value="clicked", name="c{{item.id}}"/>
-                        {% endif %}
+        {% if user.is_authenticated %}
+            <div class="userCard">
+                <h6>{{user.username}}<a href="/logout"> | salir</a></h6>
+            </div>
+        {% endif%}
+        </div>
+        
+        <div class="container">
+            <form id="test" method="POST" action="#">
+                {% csrf_token %}
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input type="text", name="new_text">
+                    <button type="submit", name="new_item", value="new_item", class="btn btn-danger">Añadir tarea</button>    
+                </div>
+
+                {% for item in ls.item_set.all %}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <input type="text", value="{{item.text}}" class="form-control" size="50" readonly>
+                        <div class="input-group-text"> 
+                            {% if item.complete %}
+                                <input type="checkbox", value="clicked", name="c{{item.id}}" checked/>
+                            {% else %}
+                                <input type="checkbox", value="clicked", name="c{{item.id}}"/>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endfor %}
-            <button type="submit", name="save", value="save", class="btn btn-danger">Guardar cambios</button>    
-        </form>
-
-    </div>
-        {% endblock %}
-{% else %}
-     <p>To see the contents of a list log in <a href="/login">here</a></p>
-{% endif %}
+                {% endfor %}
+                <button type="submit", name="save", value="save", class="btn btn-danger">Guardar cambios</button>    
+            </form>
+        </div>
+        {% else %}
+            <p>Para ver el contenido de una lista, inicia sesión <a href="/login">aquí</a></p>
+        {% endif %}
+{% endblock %}
