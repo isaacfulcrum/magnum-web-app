@@ -2,23 +2,29 @@
 
 {% if user.is_authenticated %}
 
-    {% block title %} {{ls.name}} {% endblock %}
-
-    {% block name %}
+{% block title %} {{ls.name}} {% endblock %}
+    {% block content %}
+    <div class="stats"> 
+    
     <div class="title-container">
         <h1>{{ls.name}}</h1>
     </div>
-    {% endblock %}
-
-    {% block progress %}
+    
+    <div class="percent-container">
         <h1>Progreso</h1>
         <div class="progress" style="height:40px">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
             style="width:{{percent}}%;height:40px">{{percent}}%</div>
         </div>
-    {% endblock %}
+    </div>
 
-    {% block content %}
+    {% if user.is_authenticated %}
+        <div class="userCard">
+            <h6>{{user.username}}<a href="/logout"> | logout</a></h6>
+        </div>
+    {% endif%}
+    </div>
+    
     <div class="container">
         <form id="test" method="POST" action="#">
             {% csrf_token %}

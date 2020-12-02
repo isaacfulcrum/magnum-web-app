@@ -1,19 +1,21 @@
 {% extends "main/base.html" %}
 {% block title %} Create List {% endblock %}
-{% block content %} 
-<h3> Create </h3>
+{% block content %}
+<div class="home">
+<h1> Nuevo Proyecto </h1>
 {% if user.is_authenticated %}
     <form method="post" action="/create/">
         {% csrf_token %}
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button type="submit", name="save", class="btn btn-success">Create list</button>
-            </div>
             {{form.name}}
+            <div class="input-group-prepend">
+                <button type="submit", name="save", class="btn btn-danger">Crear proyecto</button>
+            </div>
         </div>
     </form> 
 {% else %} 
-    <p> To create a list, log in <a href="/login">here</a></p>
+    <p> Para crear un proyecto, inicia sesión <a href="/login">aquí</a></p>
 {% endif %}
+</div>
 {% endblock %}
 
