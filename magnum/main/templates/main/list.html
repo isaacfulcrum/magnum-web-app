@@ -36,7 +36,11 @@
                     <input type="text", name="new_text">
                     <button type="submit", name="new_item", value="new_item", class="btn btn-danger">Añadir tarea</button>    
                 </div>
-
+                {% if messages %}
+                    {% for message in messages%}
+                        <div class="alert alert-danger" role="alert">{{message}}</div>      
+                    {%endfor%}
+                {% endif%}
                 {% for item in ls.item_set.all %}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import ToDoList
 from .forms import create_list
+from django.contrib import messages
+
 # Create your views here.
 
 
@@ -27,7 +29,8 @@ def index(response, id):
                 if(len(text) > 2):
                     ls.item_set.create(text=text, complete=False)
                 else:
-                    print("Invalid input")
+                    messages.warning(
+                        response, 'Una tarea debe contener más de dos caracteres')
 
         percent = ls.item_set.count()
         if percent == 0:
@@ -43,7 +46,7 @@ def index(response, id):
 
         return render(response, "main/list.html", {"ls": ls, "percent": percent})
 
-    return render(response, "main/view.html", {})
+    return render(response, "main/list.html", {})
 
 
 def home(response):
