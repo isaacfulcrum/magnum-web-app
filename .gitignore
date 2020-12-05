@@ -5,6 +5,7 @@
 __pycache__
 db.sqlite3
 media
+secret_settings.py
 
 
 # Visual Studio Code # 
