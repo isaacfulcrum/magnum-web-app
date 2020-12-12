@@ -13,4 +13,4 @@ The functionality of the app is pretty straight forward: you sign up, login to y
 <h2>Project view</h2>
 <img src="https://raw.githubusercontent.com/isaacfulcrum/Magnum/main/assets/project.png?token=AOAQ2ZGKDSDY4HFZIXRZBQ272P3L4" alt=""/>
 <h2>About</h2>
-Magnum is made with django, html, css and bootstrap4. It is based off of a django tutorial for beginners and it's my first web app, so you can expect improvement in a lot of areas for my next projects. Thanks for reading!
+Magnum is made with django, html, css and bootstrap4. It is based off of a django tutorial for beginners and it's my first web app, so you can expect improvement in a lot of areas for my next projects. Thanks for reading! 
